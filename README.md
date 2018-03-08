@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+MerchX - Api
 
-Things you may want to cover:
+MerchX is a platform to aid small bands in streamlining their merch sales at small venues. By allowing customers to pay for items through a web application with their saved card details, bands are able to cash in on opportunity sales they may not have gotten with a cash only merch stand.
 
-* Ruby version
+# Setup
 
-* System dependencies
+```
+Run the following commands in the project directory:
 
-* Configuration
+$ bundle
+$ rails db:create
+$ rails db:migrate
+$ rails db:seed
+$ rails s
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Open on http://localhost:3000
+```
