@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :products, dependent: :destroy
+
   has_secure_password
 
   validates :band_name, :password, presence: true
