@@ -22,6 +22,7 @@ gem 'active_model_serializers'
 gem 'rack-cors'
 gem 'faker', '~> 1.8.7'
 gem 'jwt'
+gem "rails-erd"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
