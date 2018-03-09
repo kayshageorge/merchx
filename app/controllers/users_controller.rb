@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
@@ -46,6 +47,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:band_name, :email, :password_digest, :description)
+      params.require(:user).permit(:band_name, :email, :password, :password_confirmation, :description)
     end
 end
