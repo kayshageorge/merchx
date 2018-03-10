@@ -10,10 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180309190420) do
+ActiveRecord::Schema.define(version: 20180309235223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "customers", force: :cascade do |t|
+    t.string "email"
+    t.boolean "marketing"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.bigint "order_id"
+    t.bigint "sku_id"
+    t.string "qty"
+    t.string "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+    t.index ["sku_id"], name: "index_line_items_on_sku_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "customer_id"
+    t.boolean "picked_up", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+  end
 
   create_table "products", force: :cascade do |t|
     t.string "title"
@@ -44,6 +70,9 @@ ActiveRecord::Schema.define(version: 20180309190420) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "line_items", "orders"
+  add_foreign_key "line_items", "skus"
+  add_foreign_key "orders", "customers"
   add_foreign_key "products", "users"
   add_foreign_key "skus", "products"
 end
