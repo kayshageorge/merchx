@@ -1,9 +1,7 @@
-class User < ApplicationRecord
-  has_many :products, dependent: :destroy
+class Customer < ApplicationRecord
+  has_many :orders, dependent: :nullify
 
-  has_secure_password
-
-  validates :band_name, :password, presence: true
+  validates :marketing, presence: true
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
