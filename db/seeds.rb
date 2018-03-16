@@ -13,14 +13,17 @@ super_user = User.create(
   password: PASSWORD,
 )
 
-productImages = ["https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_16.00.58_1024x1024.png?v=1517241862", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_16.01.12_1024x1024.png?v=1517241779", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_15.29.43_1024x1024.png?v=1517240022", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-25_at_16.00.40_1024x1024.png?v=1516896905", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-25_at_16.00.51_1024x1024.png?v=1516896455", "https://cdn.shopify.com/s/files/1/1281/3519/products/Stow_1_1024x1024.jpg?v=1475158545", "https://cdn.shopify.com/s/files/1/1281/3519/products/Ladies_crest_1024x1024.jpg?v=1462893324", "https://cdn.shopify.com/s/files/1/1281/3519/products/Ladies_Cambersands_1024x1024.jpg?v=1462973638", "https://cdn.shopify.com/s/files/1/1281/3519/products/Ladies_Bowlie_1024x1024.jpg?v=1462972805"]
 
-10.times.each do
+
+productImages = ["https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_16.00.58_1024x1024.png?v=1517241862", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_15.29.43_1024x1024.png?v=1517240022", "https://cdn.shopify.com/s/files/1/1281/3519/products/Ladies_crest_1024x1024.jpg?v=1462893324", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_16.01.12_1024x1024.png?v=1517241779", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-25_at_16.00.40_1024x1024.png?v=1516896905", "https://cdn.shopify.com/s/files/1/1281/3519/products/Stow_1_1024x1024.jpg?v=1475158545", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-25_at_16.00.51_1024x1024.png?v=1516896455", "https://cdn.shopify.com/s/files/1/1281/3519/products/men_dancing_bear_1024x1024.jpg?v=1462892446"]
+
+for image in productImages
   item = Product.create(
     title: Faker::Book.title,
     description: Faker::HitchhikersGuideToTheGalaxy.quote,
     user: super_user,
-    images: productImages.sample
+    images: image,
+    price: rand(15..30)
   )
   if item.valid?
     sizes = ['l-xs', 'l-sm', 'l-m', 'l-lg', 'l-xl', 'u-xs', 'u-sm', 'u-m', 'u-lg', 'u-xl']
@@ -29,7 +32,6 @@ productImages = ["https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Sh
       Sku.create(
         product: item,
         size: size,
-        price: rand(15..30),
         qty: rand(15..50)
       )
     end
@@ -50,7 +52,8 @@ end
         title: Faker::HitchhikersGuideToTheGalaxy.starship,
         description: Faker::HitchhikersGuideToTheGalaxy.quote,
         user: u,
-        images: 'http://lorempixel.com/300/400/'
+        images: 'http://lorempixel.com/300/400/',
+        price: rand(15..30)
       )
       if item.valid?
         sizes = ['l-xs', 'l-sm', 'l-m', 'l-lg', 'l-xl', 'u-xs', 'u-sm', 'u-m', 'u-lg', 'u-xl']
@@ -59,7 +62,6 @@ end
           Sku.create(
             product: item,
             size: size,
-            price: rand(15..30),
             qty: rand(15..50)
           )
         end
@@ -88,7 +90,7 @@ skus = Sku.all
         rand(1..5).times.each do
           product_sku = skus.sample
           count = rand(1..2)
-          price = product_sku.price * count
+          price = product_sku.product.price * count
           LineItem.create(
             order: o,
             sku: product_sku,

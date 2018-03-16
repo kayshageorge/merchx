@@ -1,5 +1,5 @@
 class ProductSerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :images
+  attributes :id, :title, :description, :images, :price
 
   belongs_to :user, key: :band
 
@@ -9,6 +9,6 @@ class ProductSerializer < ActiveModel::Serializer
 
   has_many :skus
   class SkuSerializer < ActiveModel::Serializer
-    attributes :id, :size, :price, :qty
+    attributes :id, :size, :qty
   end
 end

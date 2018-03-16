@@ -15,4 +15,6 @@ Rails.application.routes.draw do
 
   resources :tokens, only: [:create]
 
+  match "*unmatched_route", to: "application#not_found", via: :all;
+  
 end

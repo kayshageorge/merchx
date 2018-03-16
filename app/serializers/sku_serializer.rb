@@ -1,4 +1,4 @@
 class SkuSerializer < ActiveModel::Serializer
-  attributes :id, :size, :price, :qty
+  attributes :id, :size, :qty
   belongs_to :product
 end
