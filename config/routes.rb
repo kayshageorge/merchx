@@ -13,8 +13,10 @@ Rails.application.routes.draw do
     end
   end
 
+  post '/users/search', to: "users#search"
+
   resources :tokens, only: [:create]
 
   match "*unmatched_route", to: "application#not_found", via: :all;
-  
+
 end
