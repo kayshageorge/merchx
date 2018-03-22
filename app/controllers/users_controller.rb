@@ -14,6 +14,11 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  def search
+    @user = User.where("band_name ILIKE ?", "%#{params[:search]}%")
+    render json: @user
+  end
+
   # POST /users
   def create
     @user = User.new(user_params)

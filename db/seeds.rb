@@ -52,7 +52,7 @@ end
         title: Faker::HitchhikersGuideToTheGalaxy.starship,
         description: Faker::HitchhikersGuideToTheGalaxy.quote,
         user: u,
-        images: 'http://lorempixel.com/300/400/',
+        images: Faker::Placeholdit.image("50x50", 'jpg'),
         price: rand(15..30)
       )
       if item.valid?
