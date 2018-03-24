@@ -10,6 +10,13 @@ class SkusController < ApplicationController
     render json: @skus
   end
 
+  def search
+    all_skus = Sku.where(product_id:params[:product])
+    @sku = all_skus.where(size:params[:selected_size])
+
+    render json: @sku
+  end
+
   # GET /skus/1
   def show
     render json: @sku

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
 
   post '/users/search', to: "users#search"
+  post '/skus/search', to: "skus#search"
 
   resources :tokens, only: [:create]
 
