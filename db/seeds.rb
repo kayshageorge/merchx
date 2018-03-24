@@ -15,9 +15,9 @@ super_user = User.create(
 
 
 
-productImages = ["https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_16.00.58_1024x1024.png?v=1517241862", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_15.29.43_1024x1024.png?v=1517240022", "https://cdn.shopify.com/s/files/1/1281/3519/products/Ladies_crest_1024x1024.jpg?v=1462893324", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_16.01.12_1024x1024.png?v=1517241779", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-25_at_16.00.40_1024x1024.png?v=1516896905", "https://cdn.shopify.com/s/files/1/1281/3519/products/Stow_1_1024x1024.jpg?v=1475158545", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-25_at_16.00.51_1024x1024.png?v=1516896455", "https://cdn.shopify.com/s/files/1/1281/3519/products/men_dancing_bear_1024x1024.jpg?v=1462892446"]
+bellensebImages = ["https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_16.00.58_1024x1024.png?v=1517241862", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_15.29.43_1024x1024.png?v=1517240022", "https://cdn.shopify.com/s/files/1/1281/3519/products/Ladies_crest_1024x1024.jpg?v=1462893324", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_16.01.12_1024x1024.png?v=1517241779", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-25_at_16.00.40_1024x1024.png?v=1516896905", "https://cdn.shopify.com/s/files/1/1281/3519/products/Stow_1_1024x1024.jpg?v=1475158545", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-25_at_16.00.51_1024x1024.png?v=1516896455", "https://cdn.shopify.com/s/files/1/1281/3519/products/men_dancing_bear_1024x1024.jpg?v=1462892446"]
 
-for image in productImages
+for image in bellensebImages
   item = Product.create(
     title: Faker::Book.title,
     description: Faker::HitchhikersGuideToTheGalaxy.quote,
@@ -33,6 +33,37 @@ for image in productImages
         product: item,
         size: size,
         qty: rand(0..15)
+      )
+    end
+  end
+end
+
+super_user2 = User.create(
+  band_name: "Hiatus Kaiyote",
+  email: "hiatuskaiyote@bands.ca",
+  password: PASSWORD,
+)
+
+
+
+hiatusImages = ["http://hiatuskaiyote.aracastores.com/media/catalog/product/cache/12/image/9df78eab33525d08d6e5fb8d27136e95/h/s/hsk-tee-wht-01.png", "http://hiatuskaiyote.aracastores.com/media/catalog/product/cache/12/image/9df78eab33525d08d6e5fb8d27136e95/h/s/hsk-tee-gry-02.png", "http://hiatuskaiyote.aracastores.com/media/catalog/product/cache/12/image/9df78eab33525d08d6e5fb8d27136e95/h/s/hsk-tee-blk-02.png", "http://hiatuskaiyote.aracastores.com/media/catalog/product/cache/12/image/9df78eab33525d08d6e5fb8d27136e95/h/s/hsk-tee-blk-01.png"]
+
+for image in hiatusImages
+  item = Product.create(
+    title: Faker::Book.title,
+    description: Faker::HitchhikersGuideToTheGalaxy.quote,
+    user: super_user2,
+    images: image,
+    price: rand(15..30)
+  )
+  if item.valid?
+    sizes = ['l-xs', 'l-sm', 'l-m', 'l-lg', 'l-xl', 'u-xs', 'u-sm', 'u-m', 'u-lg', 'u-xl']
+
+    for size in sizes
+      Sku.create(
+        product: item,
+        size: size,
+        qty: rand(0..5)
       )
     end
   end
