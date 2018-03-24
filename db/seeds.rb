@@ -32,7 +32,7 @@ for image in productImages
       Sku.create(
         product: item,
         size: size,
-        qty: rand(15..50)
+        qty: rand(0..15)
       )
     end
   end

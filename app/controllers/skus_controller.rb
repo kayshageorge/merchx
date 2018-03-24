@@ -4,7 +4,8 @@ class SkusController < ApplicationController
 
   # GET /skus
   def index
-    @skus = Sku.all
+    all_skus = Sku.where(product_id:params[:product_id])
+    @skus = all_skus.order(id: :asc)
 
     render json: @skus
   end
