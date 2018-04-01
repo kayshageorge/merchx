@@ -1,5 +1,5 @@
 class SkusController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:search]
   before_action :set_sku, only: [:show, :update, :destroy]
 
   def index
