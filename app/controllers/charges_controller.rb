@@ -3,8 +3,6 @@ class ChargesController < ApplicationController
   end
 
   def create
-    # Amount in cents
-    # byebug
     @amount = params[:total] * 100
 
     customer = Stripe::Customer.create(
@@ -18,7 +16,8 @@ class ChargesController < ApplicationController
       :description => 'Rails Stripe customer',
       :currency    => 'cad'
     )
-    # byebug
+
+    puts charge
     render json: charge.to_json
   rescue Stripe::CardError => e
     puts e

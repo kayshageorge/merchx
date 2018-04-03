@@ -32,7 +32,7 @@ for image in bellensebImages
       Sku.create(
         product: item,
         size: size,
-        qty: rand(0..15)
+        qty: rand(0..8)
       )
     end
   end
