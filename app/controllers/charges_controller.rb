@@ -4,7 +4,8 @@ class ChargesController < ApplicationController
 
   def create
     # Amount in cents
-    @amount = 500
+    # byebug
+    @amount = params[:total] * 100
 
     customer = Stripe::Customer.create(
       :email => "email@email.com",
