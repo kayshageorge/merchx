@@ -13,129 +13,153 @@ super_user = User.create(
   password: PASSWORD,
 )
 
+sizes = ['l-xs', 'l-sm', 'l-m', 'l-lg', 'l-xl', 'u-xs', 'u-sm', 'u-m', 'u-lg', 'u-xl']
 
-
-bellensebImages = ["https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_16.00.58_1024x1024.png?v=1517241862", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_15.29.43_1024x1024.png?v=1517240022", "https://cdn.shopify.com/s/files/1/1281/3519/products/Ladies_crest_1024x1024.jpg?v=1462893324", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_16.01.12_1024x1024.png?v=1517241779", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-25_at_16.00.40_1024x1024.png?v=1516896905", "https://cdn.shopify.com/s/files/1/1281/3519/products/Stow_1_1024x1024.jpg?v=1475158545", "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-25_at_16.00.51_1024x1024.png?v=1516896455", "https://cdn.shopify.com/s/files/1/1281/3519/products/men_dancing_bear_1024x1024.jpg?v=1462892446"]
-
-for image in bellensebImages
-  item = Product.create(
-    title: Faker::Book.title,
-    description: Faker::HitchhikersGuideToTheGalaxy.quote,
-    user: super_user,
-    images: image,
-    price: rand(15..30)
-  )
-  if item.valid?
-    sizes = ['l-xs', 'l-sm', 'l-m', 'l-lg', 'l-xl', 'u-xs', 'u-sm', 'u-m', 'u-lg', 'u-xl']
-
-    for size in sizes
-      Sku.create(
-        product: item,
-        size: size,
-        qty: rand(0..8)
-      )
-    end
-  end
-end
-
-super_user2 = User.create(
-  band_name: "Hiatus Kaiyote",
-  email: "hiatuskaiyote@bands.ca",
-  password: PASSWORD,
+one = Product.create(
+  title: "Navy 'Grow'",
+  description: "Navy cotton T-shirt featuring contrasting red lettering and flowers reaching skywards! The shirt is 100% cotton by Fairwear, providing ethical trade and justice for workers.",
+  user: super_user,
+  images: "https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_16.00.58_1024x1024.png?v=1517241862",
+  price: 25
 )
 
-
-
-hiatusImages = ["http://hiatuskaiyote.aracastores.com/media/catalog/product/cache/12/image/9df78eab33525d08d6e5fb8d27136e95/h/s/hsk-tee-wht-01.png", "http://hiatuskaiyote.aracastores.com/media/catalog/product/cache/12/image/9df78eab33525d08d6e5fb8d27136e95/h/s/hsk-tee-gry-02.png", "http://hiatuskaiyote.aracastores.com/media/catalog/product/cache/12/image/9df78eab33525d08d6e5fb8d27136e95/h/s/hsk-tee-blk-02.png", "http://hiatuskaiyote.aracastores.com/media/catalog/product/cache/12/image/9df78eab33525d08d6e5fb8d27136e95/h/s/hsk-tee-blk-01.png"]
-
-for image in hiatusImages
-  item = Product.create(
-    title: Faker::Book.title,
-    description: Faker::HitchhikersGuideToTheGalaxy.quote,
-    user: super_user2,
-    images: image,
-    price: rand(15..30)
-  )
-  if item.valid?
-    sizes = ['l-xs', 'l-sm', 'l-m', 'l-lg', 'l-xl', 'u-xs', 'u-sm', 'u-m', 'u-lg', 'u-xl']
-
-    for size in sizes
-      Sku.create(
-        product: item,
-        size: size,
-        qty: rand(0..5)
-      )
-    end
-  end
+if one.valid?
+ for size in sizes
+   Sku.create(
+     product: one,
+     size: size,
+     qty: rand(0..2)
+   )
+ end
 end
 
-20.times.each do
-  band_name = Faker::HitchhikersGuideToTheGalaxy.specie
+two = Product.create(
+  title: "Red 'Couple'",
+  description: "Burgundy T-shirt with a reprise of one of our favourite designs from the archives! The shirt is 100% cotton by Fairwear, providing ethical trade and justice for workers.",
+  user: super_user,
+  images:"https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_15.29.43_1024x1024.png?v=1517240022",
+  price: 30
+)
 
-  u = User.create(
-    band_name: band_name,
-    email: "#{band_name.strip().downcase}@band.ca",
-    password: PASSWORD
-  )
-  if u.valid?
-    rand(0..10).times.each do
-      item = Product.create(
-        title: Faker::HitchhikersGuideToTheGalaxy.starship,
-        description: Faker::HitchhikersGuideToTheGalaxy.quote,
-        user: u,
-        images: Faker::Placeholdit.image("50x50", 'jpg'),
-        price: rand(15..30)
-      )
-      if item.valid?
-        sizes = ['l-xs', 'l-sm', 'l-m', 'l-lg', 'l-xl', 'u-xs', 'u-sm', 'u-m', 'u-lg', 'u-xl']
-
-        for size in sizes
-          Sku.create(
-            product: item,
-            size: size,
-            qty: rand(15..50)
-          )
-        end
-      end
-    end
-  end
+if two.valid?
+ for size in sizes
+   Sku.create(
+     product: two,
+     size: size,
+     qty: rand(0..3)
+   )
+ end
 end
 
-users = User.all
-products = Product.all
-skus = Sku.all
+three = Product.create(
+  title: "Grey 'Dancing Bears'",
+  description: "We're feeling retro-modern with this colourful graphic equaliser design. The dancing bears, as drawn by Kat Heath for the album artwork and inspired by the projections in the Party Line live performance, adorn these black 100% cotton t-shirts. The shirt is EarthPositive, manufactured solely using renewable green energy from wind and solar power.",
+  user: super_user,
+  images:"https://cdn.shopify.com/s/files/1/1281/3519/products/men_dancing_bear_1024x1024.jpg?v=1462892446",
+  price: 20
+)
 
-100.times.each do
-  custDetails = Faker::RuPaul.queen
-  c = Customer.create(
-    email: "#{custDetails.strip().downcase}@email.com",
-    marketing: Faker::Boolean.boolean(0.5)
-  )
-  if c.valid?
-    rand(1..4).times.each do
-      o = Order.create(
-        customer: c,
-        picked_up: Faker::Boolean.boolean(0.5)
-      )
-      if o.valid?
-        rand(1..5).times.each do
-          product_sku = skus.sample
-          count = rand(1..2)
-          price = product_sku.product.price * count
-          LineItem.create(
-            order: o,
-            sku: product_sku,
-            qty: count,
-            total: price
-          )
-        end
-      end
-    end
-  end
+if three.valid?
+ for size in sizes
+   Sku.create(
+     product: three,
+     size: size,
+     qty: rand(0..4)
+   )
+ end
 end
 
-customers = Customer.all
-orders = Order.all
-lineItems = LineItem.all
+four = Product.create(
+  title: "Blue 'Grow'",
+  description: "blue cotton T-shirt featuring contrasting red lettering and flowers reaching skywards! The shirt is 100% cotton by Fairwear, providing ethical trade and justice for workers.",
+  user: super_user,
+  images:"https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-29_at_16.01.12_1024x1024.png?v=1517241779",
+  price: 20
+)
 
-puts "Created #{users.count} users and #{products.count} products and #{skus.count} skus, as well as #{customers.count} customers with #{orders.count} orders that have #{lineItems.count} lineItems. Login with email: #{super_user.email} and password: #{super_user.password}"
+if four.valid?
+ for size in sizes
+   Sku.create(
+     product: four,
+     size: size,
+     qty: rand(0..5)
+   )
+ end
+end
+
+five = Product.create(
+  title: "Black 'Space'",
+  description: "A nebula-esque design for the dedicated Belle's fan! This screen printed black cotton T-shirt features a rolled sleeve",
+  user: super_user,
+  images:"https://cdn.shopify.com/s/files/1/1281/3519/products/Screen_Shot_2018-01-25_at_15.46.20_1024x1024.png?v=1516895865",
+  price: 20
+)
+
+if five.valid?
+ for size in sizes
+   Sku.create(
+     product: five,
+     size: size,
+     qty: rand(0..8)
+   )
+ end
+end
+
+six = Product.create(
+  title: "Grey 'Fox In The Snow'",
+  description: "T-shirt with the classic and much loved 'fox in the snow' design by Manny Silva.",
+  user: super_user,
+  images:"https://cdn.shopify.com/s/files/1/1281/3519/products/Belle_Jpegs22_copy_1024x1024.jpg?v=1477922317",
+  price: 25
+)
+
+if six.valid?
+ for size in sizes
+   Sku.create(
+     product: six,
+     size: size,
+     qty: rand(0..8)
+   )
+ end
+end
+
+seven = Product.create(
+  title: "White 'Album Crest'",
+  description: "We're channeling the 1940s with this kitsch wartime-esque design. 'Girls in Peacetime Want to Dance' is in old fashioned italics, with Tamzin from the album cover art inside a vintage floral crest. The shirt is 100% cotton by Fairwear, providing ethical trade and justice for workers.",
+  user: super_user,
+  images:"https://cdn.shopify.com/s/files/1/1281/3519/products/MENS_crest1_1024x1024.jpg?v=1462893284",
+  price: 30
+)
+
+if seven.valid?
+ for size in sizes
+   Sku.create(
+     product: seven,
+     size: size,
+     qty: rand(0..8)
+   )
+ end
+end
+
+eight = Product.create(
+  title: "Blue 'Study at Stow'",
+  description: "Continuing our celebration of the band's Tigermilk & Sinister 20th Anniversary, we're bringing back some classic b&s merch designs from the early years. This t-shirt is 'Salvage' meaning that it's is 100% recycled. (60% Recycled pre-consumer organically grown cotton, 40% Recycled post consumer polyester)",
+  user: super_user,
+  images:"https://cdn.shopify.com/s/files/1/1281/3519/products/Stow_1_1024x1024.jpg?v=1475158545",
+  price: 30
+)
+
+if eight.valid?
+ for size in sizes
+   Sku.create(
+     product: eight,
+     size: size,
+     qty: rand(0..8)
+   )
+ end
+end
+
+
+
+
+puts "Login with email: #{super_user.email} and password: #{super_user.password}"
